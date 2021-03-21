@@ -162,5 +162,18 @@
 
     \end{enumerate}
 
+    \subsubsection*{Problem 2}
+    Let $Y_i$ be the indicator RV that the $i$th sampled ball is black. For a given $X$, the probability of this occuring is then $X/8$. Now notice that $Y = \sum_{i=1}^10 Y_i$. By linearity of expectation,
+    $$\boxed{\erv{Y | X} = \sum_{i=1}^{10} \frac{X}{8} = \frac{5}{4}X}$$
+    Since $Y|X$ is the sum of 10 Bernoulli trials, we have
+    $$P(Y = y|X = x) \sim \Binom{10}{x/8} = \left(\frac{x}{8}\right)^y \left(\frac{8 - x}{8}\right)^{10 - y} \binom{10}{y}$$
+    Since $X$ is uniform, $P(X = x) = 1/9$ for $0 \leq x \leq 8$. By Bayes' theorem,
+    \begin{align*}
+        P(X = x | Y = y) &= \frac{P(Y = y|X = x)P(X = x)}{\sum_{k=0}^8 P(Y = y|X = k) P(X = k)} = \frac{\left(\frac{x}{8}\right)^y \left(\frac{8 - x}{8}\right)^{10 - y}}{\sum_{k=0}^8 \left(\frac{k}{8}\right)^y \left(\frac{8 - k}{8}\right)^{10 - y}} \\
+        &= \frac{x^y (8 - x)^{10 - y}}{\sum_{k=0}^8 k^y (8 - k)^{10 - y}} \\
+        \erv{X|Y} &= \sum_{x=0}^8 x\frac{x^y (8 - x)^{10 - y}}{\sum_{k=0}^8 k^y (8 - k)^{10 - y}}
+    \end{align*}
+    $$\boxed{\erv{X|Y} = \frac{\sum_{k=0}^8 k^{y+1} (8 - k)^{10 - y}}{\sum_{k=0}^8 k^y (8 - k)^{10 - y}}}$$
+
 \end{flushleft}
 \end{document}
