@@ -175,5 +175,33 @@
     \end{align*}
     $$\boxed{\erv{X|Y} = \frac{\sum_{k=0}^8 k^{y+1} (8 - k)^{10 - y}}{\sum_{k=0}^8 k^y (8 - k)^{10 - y}}}$$
 
+    \subsubsection*{Problem 3}
+    \begin{enumerate}[label=(\alph*)]
+
+        \item
+        Nonzero transistion probabilities are described graphically as follows:
+        \qimg{0.8}{img/q3a.jpg}
+        Since the states $\{1, 2, 3\}$ and $\{4, 5\}$ are in different communicating classes, the Markov chain is $\boxed{\text{not irreducible}}$. Looking at the graph, we also characterize each state:
+        $$\boxed{\begin{cases}
+            \text{1: recurrent and periodic with period 2} \\
+            \text{2: transient and aperiodic} \\
+            \text{3: recurrent and periodic with period 2} \\
+            \text{4: transient and aperiodic} \\
+            \text{5: recurrent and aperiodic}
+        \end{cases}}$$
+
+        \item
+        Nonzero transistion probabilities are described graphically as follows:
+        \qimg{0.8}{img/q3b.jpg}
+        Because we have the loop $1 \rightarrow 2 \rightarrow 3 \rightarrow 4 \rightarrow 5 \rightarrow 1$, the Markov chain is $\boxed{\text{irreducible}}$. Hence, $\boxed{\text{all states are recurrent}}$. Finally, notice that $P_{11}^4 > 0$ because we have the chain $1 \rightarrow 3 \rightarrow 4 \rightarrow 5 \rightarrow 1$ but also $P_{11}^5 > 0$ because of the chain $1 \rightarrow 2 \rightarrow 3 \rightarrow 4 \rightarrow 5 \rightarrow 1$. Since 4 and 5 are relatively prime, this state is aperiodic. But because the Markov chain is irreducible, $\boxed{\text{all states are aperiodic}}$.
+
+        \item
+        Every pair of states is communicating. To see how, we consider the path taken by incrementing/decrementing a single dimension's coordinate, repeating for each dimension, until the target node is reached from the source node. This path has a probability of $\frac{1}{(2d)^M} > 0$, where $M$ is the Manhattan distance between the two points. The transition probability $P_{ij}^M$ between these two states over $M$ steps is therefore at least $\frac{1}{(2d)^M} > 0$. Hence $\boxed{\text{all symmetric random walks are irreducible}}$. The origin is recurrent for $d \leq 2$ and transient otherwise. Since recurrence is a class property, $\boxed{\text{all states are reccurent for } d \leq 2 \text{ and transient otherwise}}$. Finally, returning to a given node requires an even number of steps. To see why, notice that every step flips the parity of the sum of all coordinates. Furthermore, it is possible to return to a state by moving to the right and back i.e. in 2 steps. Thus $\boxed{\text{all states are periodic with period 2}}$.
+
+        \item
+        Every pair of states is communicating. Suppose we have coordinates $i < j$. Then we can go from $i$ to $j$ in $j - i$ steps with nonzero probability $\left(\frac{2}{3}\right)^{j - i}$ and go from $j$ to $i$ in $j - i$ steps with nonzero probability $\left(\frac{1}{3}\right)^{j - i}$. Thus the Markov chain is $\boxed{\text{irreducible}}$. Furthermore, $\boxed{\text{every state is transient}}$. To see why, recall that the asymmetric random walk on $\mathbb{Z}$ has a finite expected number of returns to the origin. Because the Markov chain is irreducible, every state must be transient like the origin is. Finally, we may employ the parity logic used in part (c) to find that $\boxed{\text{all states are periodic with period 2}}$.
+
+    \end{enumerate}
+
 \end{flushleft}
 \end{document}
