@@ -107,7 +107,7 @@
 \newcommand*{\Cov}[2]{\text{Cov}\left(#1, #2\right)}
 
 \newcommand*{\cdf}[2]{P\left(#1 \leq #2\right)}
-\newcommand*{\erv}[1]{\mathbb{E}\left(#1\right)}
+\newcommand*{\erv}[1]{\mathbb{E}\left[#1\right]}
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}[theorem]{Lemma}
@@ -124,7 +124,41 @@
     \begin{enumerate}[label=(\alph*)]
 
         \item
-        L
+        The event $E$ that the walker returns to the origin in $2n$ steps is precisely the event that there are equally many left and right steps, as well as equally many up and down steps. Let $E_k$ be the event that there are $k$ left and right steps, and consequently $n - k$ up and down steps. Notice that we require $k \geq 0$ and $n - k \geq 0 \, \therefore \, k \leq n$. It follows that $E_i \cap E_j = \emptyset$ for $i \neq j$ and $E = \cup_{k=0}^n E_k$.
+
+        By symmetry, each permutation of steps is equally likely. There are $\frac{1}{4^{2n}}$ total permutations, since there are $2n$ steps with four options per step. The number of permutations in the event $E_k$ is simply the number of ways to arrange $k$ left and right steps, and $n - k$ up and down steps. The multinomial coefficient gives us
+        $$\frac{(2n)!}{(k!)^2((n-k)!)^2} = \left(\frac{(2n)!}{(n!)^2}\right)\left(\frac{(n!)^2}{(k!)^2((n-k)!)^2}\right) = \binom{2n}{n}\binom{n}{k}^2$$
+        
+        Thus
+        $$P(E_k) = \frac{1}{4^{2n}}\binom{2n}{n}\binom{n}{k}^2$$
+
+        By Kolmogorov's third axiom of probability,
+        \begin{align*}
+            p_{2n} &= P(E) = \sum_{k=0}^n P(E_k) = \frac{1}{4^{2n}}\binom{2n}{n} \sum_{k=0}^n\binom{n}{k}^2
+        \end{align*}
+        \qed
+        
+        \item
+        As a small flex, we take a different approach from the hint. Consider the polynomial
+        $$(1 + x)^{2n} = (1 + x)^n (1 + x)^n$$
+        The coefficient on the $x^n$ term is $\binom{2n}{n}$. Meanwhile, the coefficient on the $x^k$ term for the polynomial $(1 + x)^n$ is $\binom{n}{k}$. But by multiplying $(1 + x)^n$ with itself, we find that the coefficient on the $x^n$ term is also given by the convolutional sum
+        $$\binom{2n}{n} x^n = \sum_{k=0}^n \left(\binom{n}{k} x^k\right)\left(\binom{n}{n-k} x^{n-k}\right) = \sum_{k=0}^n \binom{n}{k}\binom{n}{n-k}x^n$$
+        $$\binom{2n}{n} = \sum_{k=0}^n \binom{n}{k}\binom{n}{n-k} = \sum_{k=0}^n \binom{n}{k}^2$$
+        \qed
+
+        \item
+        We use the identity from part (b) to find
+        $$P(E) = \frac{1}{4^{2n}}\binom{2n}{n}^2$$
+
+        Let $M$ be the number of returns to the origin. If we denote $X_{2n}$ as an indicator RV for returning to the origin after $2n$ steps, we have by linearity of expectaion
+        \begin{align*}
+            \erv{M} &= \sum_{n=0}^\infty \erv{X_{2n}} = \sum_{n=0}^\infty p_{2n} = \sum_{n=0}^\infty \frac{1}{4^{2n}}\binom{2n}{n}^2
+        \end{align*}
+        The convergence of this sum depends only on the behaviour of the summand for large $n$. In this regime, we use Stirling's approximation:
+        \begin{align*}
+            \erv{M} &\sim \sum_{n=0}^\infty \frac{1}{4^{2n}} \left(\frac{(2n)^{2n} e^{-2n} \sqrt{4\pi n}}{n^{2n} e^{-2n} (2\pi n)}\right)^2 = \sum_{n=0}^\infty \frac{1}{4^{2n}} \left(\frac{2^{2n}}{\sqrt{\pi n}}\right)^2 = \sum_{n=0}^\infty \frac{1}{\pi n}
+        \end{align*}
+        This is a harmonic series, which diverges to infinity. Hence $\erv{M} = +\infty$, so the transient walk is recurrent.\qed
 
     \end{enumerate}
 
