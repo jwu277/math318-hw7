@@ -219,5 +219,40 @@
     \end{align*}
     \qed
 
+    \subsubsection*{Problem 6}
+    \begin{enumerate}[label=(\alph*)]
+
+        \item
+        If Mark initially has 0 or $n$ dollars, no games will be played (with certainty) as the process terminates immediately. Hence $M_0 = M_n = 0$. Now if $0 < k < n$, Mark will play a game, which he will either win or lose. Let $W$ be the event he wins. Then the event he loses is $W^c$. If $X$ is the number of games played, then $\erv{X|W} = 1 + M_{k+1}$ since we add the game that Mark just played, in addition to the expected number of games he will be playing, now starting with $k + 1$ dollars. Similarly, $\erv{X|W^c} = 1 + M_{k-1}$. Thus
+        \begin{align*}
+            M_k &= \erv{X} = \erv{X|W}P(W) + \erv{X|W^c}P(W^c) = p(1 + M_{k+1}) + q(1 + M_{k-1}) \\
+            &= (p + q) + pM_{k+1} + qM_{k-1} = 1 + pM_{k+1} + qM_{k-1}
+        \end{align*}
+
+        \item
+        First we consider the case $p = q = 1/2$. Then the homogeneous equation is
+        $$M_k = \frac{M_{k+1} + M_{k-1}}{2} \; \therefore \; M_{k} - M_{k-1} = M_{k+1} - M_{k}$$
+        This implies that the homogeneous solution is linear: $M_k = a + bk$. For the inhomogeneous equation, we guess $M_k = ck^2$. Then
+        $$ck^2 = 1 + \frac{c(k+1)^2 + c(k-1)^2}{2} = 1 + ck^2 + c \; \therefore \; c = -1$$
+        That gives the general solution $M_k = a + bk - k^2$. Plugging in the boundary conditions gives us $M_0 = a = 0$ and $M_n = bn - n^2 = 0 \; \therefore \; b = n$. This gives us $M_k = nk - k^2 = k(n-k)$ for $p = 1/2$.
+        \qed\\
+        Now let us consider the case that $p \neq 1/2 \; \therefore \; p \neq q$. We make the ansatz that $M_k = x^k$ for the homogeneous equation. That gives us
+        $$x^k = px^{k+1} + qx^{k-1}$$
+        This yields the quadratic
+        $$px^2 - x + (1-p) = 0$$
+        \begin{align*}
+            x &= \frac{1}{2p} \left(1 \pm \sqrt{1 - 4p(1-p)}\right) = \frac{1}{2p} \left(1 \pm \sqrt{4p^2 - 4p + 1}\right) = \frac{1}{2p} \left(1 \pm (1 - 2p)\right) \\
+            &= 1, \, \frac{1 - p}{p} = 1, \, \alpha
+        \end{align*}
+        Since $p \neq 1/2$, $1 \neq \frac{1-p}{p}$, so these are two distinct roots. The general homogeneous solution is thus $M_k = a + b\left(\frac{1 - p}{p}\right)^k$. Now we guess $M_k = ck$ for the inhomogeneous equation:
+        $$ck = 1 + pc(k + 1) + qc(k - 1) = 1 + (p - q)c + (p + q)ck = 1 + (p - q)c + ck$$
+        $$1 + (p - q)c = 0 \; \therefore \; c = \frac{1}{q - p}$$
+        Recall that $p \neq q$ for this case. We now have the general solution $M_k = \frac{k}{q - p} + a + b\alpha^k$. Plugging in boundary conditions gets us $M_0 = a + b = 0 \; \therefore \; b = -a$. Thus $M_k = \frac{k}{q - p} + a\left(1 - \alpha^k\right)$. Now, $M_n = \frac{n}{q - p} + a\left(1 - \alpha^n\right) = 0$, giving us $a = -\frac{n}{q - p}\frac{1}{\left(1 - \alpha^n\right)}$. Hence, our solution is
+        $$M_k = \frac{k}{q - p} - \frac{n}{q - p}\frac{1 - \alpha^k}{1 - \alpha^n}$$
+        for $p \neq 1/2$.
+        \qed
+
+    \end{enumerate}
+
 \end{flushleft}
 \end{document}
