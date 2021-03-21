@@ -208,5 +208,16 @@
     $$(P^T)^3 \begin{pmatrix} 1/2 \\ 1/2 \\ 0 \end{pmatrix} = \begin{pmatrix} 0.4028 \\ 0.1759 \\ 0.4213 \end{pmatrix}$$
     Thus $\boxed{P(X_3 = 3) = 0.4213}$.
 
+    \subsubsection*{Problem 5}
+    Suppose we have $i$ heads on the table. Selecting a coin with uniform probability, we have an $i/n$ probability of selecting a coin with heads and an $(n-i)/n$ probability of selecting a coin with tails. Denote these events as $h$ and $t$, respectively.
+
+    Now denote the events of flipping a heads $H$ and flipping a tails $T$. Then $P(H | h) = P(H | t) = P(T | h) = P(T | t) = 1/2$. Now,
+    \begin{align*}
+        P_{ii} &= P(H, h) + P(T, t) = P(H | h)P(h) + P(T | t)P(t) = \frac{i}{2n} + \frac{n - i}{2n} = \frac{n}{2n} = \frac{1}{2} \\
+        P_{i,i-1} &= P(T, h) = P(T | h)P(h) = \frac{i}{2n} \\
+        P_{i,i+1} &= P(H, t) = P(H | t)P(t) = \frac{n - i}{2n}
+    \end{align*}
+    \qed
+
 \end{flushleft}
 \end{document}
